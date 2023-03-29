@@ -2,18 +2,18 @@ import produce from "immer";
 import { SET_ALL_POKEMON } from "../constants/index";
 
 export const initialState = {
-  pokemons: [],
+  products: [],
 };
 
-const invitationState = (state = initialState, action) =>
+const productReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
       case SET_ALL_POKEMON:
-        draft.pokemons = action.pokemons;
+        draft.products = action.products;
         break;
       default:
         return state;
     }
   });
 
-export default invitationState;
+export default productReducer;

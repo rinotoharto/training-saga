@@ -1,29 +1,25 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import _ from "lodash";
 import {
-  GET_ALL_GUEST,
+  GET_ALL_POKEMON,
 } from "./store/constants/index";
 import {
-  getAllGuest,
+  getAllPokemon,
 } from "./domain/API";
 import {
-  setGuests,
-  setMessages,
+  setAllPokemon,
 } from "./store/actions";
 
-function* doGetAllGuest() {
+function* doGetAllPokemon() {
   try {
-    const guestsData = yield call(getAllGuest);
-    const messages = guestsData?.guests.filter((item) => {
-      return !_.isEmpty(item.message);
-    });
-    yield put(setMessages(messages.reverse()));
-    yield put(setGuests(guestsData.guests));
+    const pokemons = yield call(getAllPokemon);
+    console.log(pokemons, '<<< pokemons saga');
+    yield put(setAllPokemon(pokemons));
   } catch (error) {
     console.log(error);
   }
 }
 
 export default function* mySaga() {
-  yield takeLatest(GET_ALL_GUEST, doGetAllGuest);
+  yield takeLatest(GET_ALL_POKEMON, doGetAllPokemon);
 }
