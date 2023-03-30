@@ -29,6 +29,10 @@ export const getAllPokemon = () => {
   return callAPI(urls.get_all_pokemon, "get", {}, {}, {}, base_URL);
 };
 
-export const getDummyData = () => {
+export const getAllProduct = () => {
   return callAPI(urls.get_all_product, 'get', {}, {}, {}, secondaryURL);
+}
+
+export const postProduct = (data) => {
+  return callAPI(urls.get_all_product, 'get', {}, data, {}, secondaryURL);
 }

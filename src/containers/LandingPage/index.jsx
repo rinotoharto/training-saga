@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 import { getAllPokemon } from '../../store/actions';
 
 const LandingPage = () => {
@@ -22,14 +21,15 @@ const LandingPage = () => {
   }, [pokemons])
 
   const redirect = () => {
-    navigate('/product');
+    navigate('/products');
   }
 
   return (
     <div>
-      Landing Page<br />
-      {pokemon?.name}
-      <button onClick={redirect}>Go To Product</button>
+      Landing Page
+      <p>{pokemon?.name}</p>
+      <button className='btn btn-success' onClick={redirect}>Go To Product dengan Navigate</button><br/>
+      <Link to={'/products'}><button className='btn btn-success'>Go To Product dengan Link</button></Link>
     </div>
   );
 }
