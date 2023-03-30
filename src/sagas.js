@@ -1,8 +1,13 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import _ from "lodash";
-import { GET_ALL_POKEMON, GET_ALL_PRODUCT } from "./store/constants/index";
-import { getAllPokemon, getAllProduct } from "./domain/API";
-import { setAllPokemon, setAllProduct } from "./store/actions";
+import {
+  GET_ALL_POKEMON,
+  GET_ALL_PRODUCT,
+  POST_PRODUCT,
+} from "./store/constants/index";
+import { getAllPokemon, getAllProduct, postProduct } from "./domain/API";
+import { setAllPokemon, setAllProduct, setProduct } from "./store/actions";
+import { decryptData, encryptData } from "./utils/encryptionHelper";
 
 function* doGetAllPokemon() {
   try {
@@ -24,7 +29,23 @@ function* doGetAllProduct() {
   }
 }
 
+function* doPostProduct({ product }) {
+  try {
+    const products = yield call(postProduct, product);
+    const decryptedData = {
+      title: decryptData(products.title),
+      description: decryptData(products.description),
+      thumbnail: decryptData(products.thumbnail),
+    };
+    console.log(decryptedData);
+    yield put(setProduct(products));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export default function* mySaga() {
   yield takeLatest(GET_ALL_POKEMON, doGetAllPokemon);
   yield takeLatest(GET_ALL_PRODUCT, doGetAllProduct);
+  yield takeLatest(POST_PRODUCT, doPostProduct);
 }

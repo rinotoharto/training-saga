@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProduct } from "../../store/actions";
 import Cards from "../../components/Cards";
+import { Link } from "react-router-dom";
 
 const ProductPage = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const ProductPage = () => {
   return (
     <>
       <div>Product Page</div>
+      <Link to={"/products/create"}><button className="btn btn-success">Create Product</button></Link>
       <div className="mb-3">
         <label htmlFor="exampleInputFindProduct1" className="form-label">
           Search
