@@ -27,10 +27,20 @@ const ProductPage = () => {
     }
   }, [searchProduct]);
 
+  const logout = () => {
+    localStorage.removeItem("userProfile");
+    window.location.reload();
+  };
+
   return (
     <>
+      <button className="btn btn-danger" onClick={logout}>
+        Logout
+      </button>
       <div>Product Page</div>
-      <Link to={"/products/create"}><button className="btn btn-success">Create Product</button></Link>
+      <Link to={"/products/create"}>
+        <button className="btn btn-success">Create Product</button>
+      </Link>
       <div className="mb-3">
         <label htmlFor="exampleInputFindProduct1" className="form-label">
           Search
@@ -43,11 +53,7 @@ const ProductPage = () => {
           aria-describedby="FindProductHelp"
         />
       </div>
-      {findProduct ? (
-        <Cards data={products} />
-      ) : (
-        <Cards data={findProduct} />
-      )}
+      {findProduct ? <Cards data={products} /> : <Cards data={findProduct} />}
     </>
   );
 };

@@ -3,13 +3,16 @@ import ReactDOM from "react-dom";
 import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { AuthContextProvider } from "./contexts/AuthContext";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <div className="container">
-      <App />
-    </div>
-  </React.StrictMode>,
+  <AuthContextProvider>
+    <React.StrictMode>
+      <div className="container">
+        <App />
+      </div>
+    </React.StrictMode>
+  </AuthContextProvider>,
   document.getElementById("root")
 );
 

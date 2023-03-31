@@ -6,3 +6,6 @@ export const SET_ALL_PRODUCT = "SET_ALL_PRODUCT";
 
 export const POST_PRODUCT = "POST_PRODUCT";
 export const SET_PRODUCT = "SET_PRODUCT";
+
+export const POST_USER = "POST_USER";
+export const SET_USER = "SET_USER";

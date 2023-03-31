@@ -7,8 +7,9 @@ const thirdURL = "https://jsonplaceholder.typicode.com/";
 
 const urls = {
   get_all_pokemon: "pokemon",
-  get_all_product: "products",
+  get_all_product: "auth/product",
   post_product: "posts",
+  auth_login: "auth/login",
 };
 
 const callAPI = (
@@ -19,6 +20,14 @@ const callAPI = (
   data = {},
   baseURL
 ) => {
+  const userProfile = JSON.parse(localStorage.getItem("userProfile"));
+  const token = userProfile?.token;
+  if (!_.isEmpty(token)) {
+    _.extend(headers, {
+      Authorization: `Bearer ${token}`,
+    });
+  }
+
   const options = {
     baseURL: baseURL,
     url: endpoint,
@@ -45,4 +54,8 @@ export const getAllProduct = () => {
 export const postProduct = (data) => {
   console.log(data);
   return callAPI(urls.post_product, "post", {}, {}, data, thirdURL);
+};
+
+export const authLogin = (data) => {
+  return callAPI(urls.auth_login, "post", {}, {}, data, secondaryURL);
 };

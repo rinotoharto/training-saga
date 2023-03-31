@@ -4,9 +4,20 @@ import {
   GET_ALL_POKEMON,
   GET_ALL_PRODUCT,
   POST_PRODUCT,
+  POST_USER,
 } from "./store/constants/index";
-import { getAllPokemon, getAllProduct, postProduct } from "./domain/API";
-import { setAllPokemon, setAllProduct, setProduct } from "./store/actions";
+import {
+  authLogin,
+  getAllPokemon,
+  getAllProduct,
+  postProduct,
+} from "./domain/API";
+import {
+  setAllPokemon,
+  setAllProduct,
+  setProduct,
+  setUser,
+} from "./store/actions";
 import { decryptData, encryptData } from "./utils/encryptionHelper";
 
 function* doGetAllPokemon() {
@@ -44,8 +55,21 @@ function* doPostProduct({ product }) {
   }
 }
 
+function* doPostUser({ user, callback }) {
+  try {
+    const users = yield call(authLogin, user);
+    yield put(setUser(users));
+    if (users) {
+      callback && callback();
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export default function* mySaga() {
   yield takeLatest(GET_ALL_POKEMON, doGetAllPokemon);
   yield takeLatest(GET_ALL_PRODUCT, doGetAllProduct);
   yield takeLatest(POST_PRODUCT, doPostProduct);
+  yield takeLatest(POST_USER, doPostUser);
 }

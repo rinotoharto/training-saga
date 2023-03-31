@@ -40,7 +40,7 @@ export default function CreateProductPage() {
           type={"text"}
           onChange={onChange}
         />
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" className="btn btn-primary">
           Submit
         </button>
       </form>

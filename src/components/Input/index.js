@@ -1,14 +1,15 @@
 export default function Input({ label, type, id, onChange }) {
   return (
-    <div class="mb-3">
-      <label for={id} class="form-label">
+    <div className="mb-3">
+      <label htmlFor={id} className="form-label">
         {label}
       </label>
       <input
         type={type}
-        class="form-control"
+        className="form-control"
         id={id}
         onChange={onChange}
+        required
       />
     </div>
   );
